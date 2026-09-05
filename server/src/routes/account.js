@@ -4,15 +4,6 @@ import { requireUser } from '../middleware/auth.js'
 
 const router = Router()
 
-router.get('/', requireUser, async (req, res) => {
-  const [[user]] = await pool.query('SELECT wallet_balance_paise FROM users WHERE id = ?', [req.user.id])
-  const [transactions] = await pool.query(
-    'SELECT * FROM wallet_transactions WHERE user_id = ? ORDER BY created_at DESC LIMIT 50',
-    [req.user.id]
-  )
-  res.json({ balancePaise: user?.wallet_balance_paise ?? 0, transactions })
-})
-
 router.get('/bookings', requireUser, async (req, res) => {
   const [rows] = await pool.query(
     `SELECT b.*, p.name AS package_name, p.price_paise FROM bookings b

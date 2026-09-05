@@ -30,7 +30,7 @@ export default function AdminLogin() {
   return (
     <div className="mx-auto flex min-h-[70vh] max-w-sm items-center px-4">
       <div className="w-full">
-        <h1 className="text-2xl font-bold text-gold-300">Admin Login</h1>
+        <h1 className="font-display text-2xl font-normal">Admin Login</h1>
         <form onSubmit={handleSubmit} className="mt-6 space-y-4">
           <input
             required

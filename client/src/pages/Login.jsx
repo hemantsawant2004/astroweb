@@ -34,8 +34,8 @@ export default function Login() {
       <Reveal className="w-full">
         <div className="mb-6 text-center">
           <span className="text-3xl text-gold-400">&#10022;</span>
-          <h1 className="mt-2 text-2xl font-bold text-gold-300">Welcome Back</h1>
-          <p className="mt-1 text-sm text-ink-soft">Log in to chat, book, and manage your wallet.</p>
+          <h1 className="mt-2 font-display text-2xl font-normal">Welcome Back</h1>
+          <p className="mt-1 text-sm text-ink-soft">Log in to book sessions and track your requests.</p>
         </div>
         <FormCard>
           <form onSubmit={handleSubmit} className="space-y-4">

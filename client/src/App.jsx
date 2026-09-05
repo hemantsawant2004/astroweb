@@ -10,7 +10,6 @@ import PackageBooking from './pages/PackageBooking'
 import Kundli from './pages/Kundli'
 import KundliMatching from './pages/KundliMatching'
 import Numerology from './pages/Numerology'
-import Callback from './pages/Callback'
 import Horoscope from './pages/Horoscope'
 import HoroscopeDetail from './pages/HoroscopeDetail'
 import Blog from './pages/Blog'
@@ -21,7 +20,6 @@ import Contact from './pages/Contact'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Dashboard from './pages/Dashboard'
-import Chat from './pages/Chat'
 import NotFound from './pages/NotFound'
 
 import AdminLogin from './pages/admin/AdminLogin'
@@ -45,7 +43,6 @@ export default function App() {
         <Route path="/kundli" element={<Kundli />} />
         <Route path="/kundli-matching" element={<KundliMatching />} />
         <Route path="/numerology" element={<Numerology />} />
-        <Route path="/callback" element={<Callback />} />
         <Route path="/horoscope" element={<Horoscope />} />
         <Route path="/horoscope/:sign" element={<HoroscopeDetail />} />
         <Route path="/blog" element={<Blog />} />
@@ -55,7 +52,6 @@ export default function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/chat" element={<Chat />} />
         <Route
           path="/dashboard"
           element={
@@ -81,7 +77,7 @@ export default function App() {
         <Route path="astrologer" element={<AdminAstrologer />} />
         <Route path="testimonials" element={<AdminTestimonials />} />
         <Route path="faqs" element={<AdminFaqs />} />
-        <Route path="horoscopes" element={<AdminHoroscopes />} />
+        {/* <Route path="horoscopes" element={<AdminHoroscopes />} /> */}
         <Route path="blog" element={<AdminBlog />} />
       </Route>
 

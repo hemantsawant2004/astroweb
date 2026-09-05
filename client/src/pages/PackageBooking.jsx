@@ -106,7 +106,7 @@ export default function PackageBooking() {
           <div className="gradient-cta mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full text-2xl font-bold text-black shadow-[0_0_40px_rgba(212,175,55,0.4)]">
             &#10003;
           </div>
-          <h1 className="text-2xl font-bold text-gold-300">Booking confirmed!</h1>
+          <h1 className="font-display text-2xl font-normal">Booking confirmed!</h1>
           <p className="mt-3 text-ink-soft">
             Your {pkg.name} is booked and paid. We&apos;ll reach out at {form.phone || form.email} to confirm the
             appointment time.
@@ -123,7 +123,7 @@ export default function PackageBooking() {
     <div className="mx-auto max-w-xl px-4 py-16">
       <Reveal>
         <p className="star-dot text-xs font-semibold uppercase tracking-widest text-gold-400">Book a Session</p>
-        <h1 className="mt-2 text-2xl font-bold text-gold-300 sm:text-3xl">{pkg.name}</h1>
+        <h1 className="mt-2 font-display text-2xl font-normal sm:text-3xl">{pkg.name}</h1>
         <p className="mt-2 text-ink-soft">{pkg.description}</p>
         <p className="mt-2 text-xl font-extrabold text-gold-400">
           {formatPaise(pkg.price_paise)} &middot; {pkg.duration_min} min

@@ -26,7 +26,7 @@ router.post('/signup', async (req, res) => {
       [name, email, passwordHash, phone || null]
     )
     const user = { id: result.insertId, name, email }
-    res.status(201).json({ token: signUserToken(user), user: { ...user, phone, wallet_balance_paise: 0 } })
+    res.status(201).json({ token: signUserToken(user), user: { ...user, phone } })
   } catch (err) {
     res.status(500).json({ error: 'Signup failed', detail: err.message })
   }
@@ -50,7 +50,6 @@ router.post('/login', async (req, res) => {
         name: user.name,
         email: user.email,
         phone: user.phone,
-        wallet_balance_paise: user.wallet_balance_paise,
       },
     })
   } catch (err) {

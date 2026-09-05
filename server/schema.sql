@@ -7,7 +7,6 @@ CREATE TABLE IF NOT EXISTS users (
   email VARCHAR(190) NOT NULL UNIQUE,
   password_hash VARCHAR(255) NOT NULL,
   phone VARCHAR(30),
-  wallet_balance_paise INT NOT NULL DEFAULT 0,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -20,7 +19,6 @@ CREATE TABLE IF NOT EXISTS astrologers (
   specializations VARCHAR(500),
   experience_years INT,
   languages VARCHAR(255),
-  chat_rate_paise_per_min INT NOT NULL DEFAULT 0,
   avatar_initials VARCHAR(5) DEFAULT 'AJ',
   is_online BOOLEAN DEFAULT TRUE,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -76,53 +74,6 @@ CREATE TABLE IF NOT EXISTS chart_requests (
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
 );
 
-CREATE TABLE IF NOT EXISTS callback_requests (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  user_id INT,
-  astrologer_id INT NOT NULL,
-  name VARCHAR(150) NOT NULL,
-  phone VARCHAR(30) NOT NULL,
-  preferred_time VARCHAR(100),
-  status ENUM('new','contacted','closed') DEFAULT 'new',
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL,
-  FOREIGN KEY (astrologer_id) REFERENCES astrologers(id)
-);
-
-CREATE TABLE IF NOT EXISTS wallet_transactions (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  user_id INT NOT NULL,
-  type ENUM('credit','debit') NOT NULL,
-  amount_paise INT NOT NULL,
-  razorpay_payment_id VARCHAR(100),
-  chat_session_id INT,
-  balance_after_paise INT NOT NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-);
-
-CREATE TABLE IF NOT EXISTS chat_sessions (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  user_id INT NOT NULL,
-  astrologer_id INT NOT NULL,
-  started_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  ended_at TIMESTAMP NULL,
-  minutes_used INT DEFAULT 0,
-  amount_charged_paise INT DEFAULT 0,
-  status ENUM('active','ended') DEFAULT 'active',
-  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-  FOREIGN KEY (astrologer_id) REFERENCES astrologers(id)
-);
-
-CREATE TABLE IF NOT EXISTS chat_messages (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  session_id INT NOT NULL,
-  sender ENUM('user','astrologer') NOT NULL,
-  message TEXT NOT NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (session_id) REFERENCES chat_sessions(id) ON DELETE CASCADE
-);
-
 CREATE TABLE IF NOT EXISTS testimonials (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(150) NOT NULL,
@@ -175,9 +126,7 @@ CREATE TABLE IF NOT EXISTS enquiries (
 );
 
 -- Seed: the real (only) consultant on MyAstroReader.
--- chat_rate is derived from the real "Clarity Session" package (Rs 3000 / 15 min = Rs 200/min)
--- since the source site has no per-minute chat pricing of its own.
-INSERT INTO astrologers (name, slug, tagline, bio, specializations, languages, chat_rate_paise_per_min, avatar_initials, is_online)
+INSERT INTO astrologers (name, slug, tagline, bio, specializations, languages, avatar_initials, is_online)
 VALUES (
   'Amit Joshi',
   'amit-joshi',
@@ -185,7 +134,6 @@ VALUES (
   'Amit Joshi is described as India''s first Scientific Astrology based Career & Relationship Counselor. He holds a B.E. in Mechanical Engineering (First Class with Distinction) from Shivaji University, and trained in astrology under "Master" Greenstone Lobo. His approach, rooted in Rishi Parashar''s traditions, also incorporates distant cosmic bodies (Pluto, Neptune, Uranus, Chiron) and hypothetical planets not considered in traditional systems. He analyzes birth charts without prescribing remedies or rituals -- birth date, time and place are required for an accurate reading. Outside astrology he has run ventures in PVC manufacturing, pharmaceuticals and interior design, and currently manages pharmaceutical businesses and hospital consultancy alongside his astrology practice.',
   'Scientific Astrology, Career Counseling, Relationship Compatibility, Vedic Chart Analysis',
   'English, Marathi',
-  20000,
   'AJ',
   TRUE
 )

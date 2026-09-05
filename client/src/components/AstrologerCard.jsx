@@ -1,12 +1,14 @@
 import { Link } from 'react-router-dom'
-import { formatPaise } from '../utils/money'
+import astrologerPhoto from '../assets/amit-joshi.jpg'
 
 export default function AstrologerCard({ astrologer }) {
   return (
-    <div className="card-gold flex flex-col items-center gap-4 rounded-2xl bg-surface p-8 text-center shadow-[0_15px_40px_-15px_rgba(212,175,55,0.3)] border border-gold-500/25 sm:flex-row sm:text-left">
-      <div className="flex h-24 w-24 shrink-0 items-center justify-center rounded-full gradient-cta text-3xl font-bold text-black">
-        {astrologer.avatar_initials}
-      </div>
+    <div className="card-gold flex flex-col items-center gap-4 rounded-2xl border border-gold-500/40 bg-surface p-8 text-center shadow-[0_25px_60px_-15px_rgba(202,177,120,0.35)] sm:flex-row sm:text-left">
+      <img
+        src={astrologerPhoto}
+        alt={astrologer.name}
+        className="h-24 w-24 shrink-0 rounded-full border-2 border-gold-500/40 object-cover object-top"
+      />
       <div className="flex-1">
         <div className="flex items-center justify-center gap-2 sm:justify-start">
           <h3 className="text-xl font-bold text-gold-300">{astrologer.name}</h3>
@@ -21,18 +23,9 @@ export default function AstrologerCard({ astrologer }) {
         </div>
         <p className="mt-1 text-sm text-ink-soft">{astrologer.tagline}</p>
         <p className="mt-1 text-xs text-ink-soft">{astrologer.specializations}</p>
-        <p className="mt-1 text-xs font-semibold text-gold-400">
-          Chat: {formatPaise(astrologer.chat_rate_paise_per_min)}/min
-        </p>
         <div className="mt-4 flex flex-wrap justify-center gap-3 sm:justify-start">
-          <Link to="/chat" className="gradient-cta rounded-full px-5 py-2 text-sm font-bold text-black shadow">
-            Chat Now
-          </Link>
-          <Link
-            to="/callback"
-            className="rounded-full border border-gold-500 px-5 py-2 text-sm font-bold text-gold-300 hover:bg-gold-500/10"
-          >
-            Request Callback
+          <Link to="/packages" className="gradient-cta rounded-full px-5 py-2 text-sm font-bold text-black shadow">
+            Book a Consultation
           </Link>
         </div>
       </div>

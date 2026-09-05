@@ -18,7 +18,7 @@ export default function Footer() {
           <ul className="space-y-2 text-sm">
             <li><Link to="/packages" className="hover:text-gold-400">Book a Consultation</Link></li>
             <li><Link to="/kundli" className="hover:text-gold-400">Kundli Request</Link></li>
-            <li><Link to="/horoscope" className="hover:text-gold-400">Daily Horoscope</Link></li>
+            {/* <li><Link to="/horoscope" className="hover:text-gold-400">Daily Horoscope</Link></li> */}
             <li><Link to="/testimonials" className="hover:text-gold-400">Testimonials</Link></li>
           </ul>
         </div>

@@ -35,23 +35,6 @@ router.post('/chart-requests', optionalUser, async (req, res) => {
   }
 })
 
-router.post('/callback-requests', optionalUser, async (req, res) => {
-  const { astrologerId, name, phone, preferredTime } = req.body || {}
-  if (!astrologerId || !name || !phone) {
-    return res.status(400).json({ error: 'astrologerId, name and phone are required' })
-  }
-  try {
-    const [result] = await pool.query(
-      `INSERT INTO callback_requests (user_id, astrologer_id, name, phone, preferred_time)
-       VALUES (?, ?, ?, ?, ?)`,
-      [req.user?.id || null, astrologerId, name, phone, preferredTime || null]
-    )
-    res.status(201).json({ id: result.insertId })
-  } catch (err) {
-    res.status(500).json({ error: 'Could not submit callback request', detail: err.message })
-  }
-})
-
 router.post('/enquiries', async (req, res) => {
   const { name, email, phone, message } = req.body || {}
   if (!name || !message) return res.status(400).json({ error: 'name and message are required' })

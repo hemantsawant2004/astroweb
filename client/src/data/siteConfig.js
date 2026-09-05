@@ -1,5 +1,5 @@
 export const siteConfig = {
-  name: 'MyAstroReader',
+  name: 'myastroreader',
   tagline: 'Scientific Astrology based Career & Relationship Counseling',
   astrologer: {
     name: 'Amit Joshi',
@@ -15,7 +15,7 @@ export const siteConfig = {
     { label: 'Home', to: '/' },
     { label: 'Packages', to: '/packages' },
     { label: 'Kundli', to: '/kundli' },
-    { label: 'Horoscope', to: '/horoscope' },
+    // { label: 'Horoscope', to: '/horoscope' },
     { label: 'About', to: '/about' },
     { label: 'Blog', to: '/blog' },
     { label: 'FAQ', to: '/faq' },

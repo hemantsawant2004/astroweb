@@ -4,7 +4,6 @@ import { adminApi } from '../../api/client'
 const SECTIONS = {
   bookings: { statuses: ['pending', 'confirmed', 'completed', 'cancelled'] },
   'chart-requests': { statuses: ['new', 'reviewed', 'contacted', 'closed'] },
-  'callback-requests': { statuses: ['new', 'contacted', 'closed'] },
   enquiries: { statuses: null },
 }
 

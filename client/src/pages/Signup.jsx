@@ -34,8 +34,8 @@ export default function Signup() {
       <Reveal className="w-full">
         <div className="mb-6 text-center">
           <span className="text-3xl text-gold-400">&#10022;</span>
-          <h1 className="mt-2 text-2xl font-bold text-gold-300">Create Account</h1>
-          <p className="mt-1 text-sm text-ink-soft">Book sessions, top up your wallet, and chat live.</p>
+          <h1 className="mt-2 font-display text-2xl font-normal">Create Account</h1>
+          <p className="mt-1 text-sm text-ink-soft">Book sessions and track your requests in one place.</p>
         </div>
         <FormCard>
           <form onSubmit={handleSubmit} className="space-y-4">

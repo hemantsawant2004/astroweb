@@ -39,7 +39,7 @@ export default function HoroscopeDetail() {
         <Reveal className="flex flex-col items-center">
           <Link to="/horoscope" className="self-start text-sm text-gold-400 hover:underline">&larr; All signs</Link>
           <span className="mt-2 text-5xl text-gold-400">{zodiacSymbol(data.zodiac_sign)}</span>
-          <h1 className="mt-2 text-3xl font-extrabold capitalize text-gold-300">{data.zodiac_sign}</h1>
+          <h1 className="mt-2 font-display text-3xl font-normal capitalize">{data.zodiac_sign}</h1>
           <p className="mt-1 text-sm capitalize text-ink-soft">{data.period} outlook</p>
         </Reveal>
       </div>

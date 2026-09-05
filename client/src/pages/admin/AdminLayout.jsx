@@ -7,7 +7,7 @@ const TABS = [
   { to: '/admin/dashboard/astrologer', label: 'Astrologer Profile' },
   { to: '/admin/dashboard/testimonials', label: 'Testimonials' },
   { to: '/admin/dashboard/faqs', label: 'FAQs' },
-  { to: '/admin/dashboard/horoscopes', label: 'Horoscopes' },
+  // { to: '/admin/dashboard/horoscopes', label: 'Horoscopes' },
   { to: '/admin/dashboard/blog', label: 'Blog' },
 ]
 
@@ -18,7 +18,7 @@ export default function AdminLayout() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-extrabold text-gold-300">Admin Dashboard</h1>
+        <h1 className="font-display text-2xl font-normal">Admin Dashboard</h1>
         <button
           onClick={() => {
             logout()

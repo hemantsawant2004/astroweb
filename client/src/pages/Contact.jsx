@@ -30,7 +30,7 @@ export default function Contact() {
     <div className="mx-auto grid max-w-5xl gap-10 px-4 py-16 lg:grid-cols-2">
       <Reveal>
         <p className="star-dot text-xs font-semibold uppercase tracking-widest text-gold-400">Get in Touch</p>
-        <h1 className="mt-2 text-3xl font-extrabold text-gold-300 sm:text-4xl">Contact Us</h1>
+        <h1 className="mt-2 font-display text-3xl font-normal sm:text-4xl">Contact Us</h1>
         <p className="mt-4 text-ink-soft">Questions before booking? Reach out directly or send a message.</p>
         <div className="card-gold mt-8 space-y-3 rounded-2xl border border-gold-500/20 bg-surface p-6 text-ink-soft">
           <p><strong className="text-gold-300">Email:</strong> {siteConfig.contact.email}</p>

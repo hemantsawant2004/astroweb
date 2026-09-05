@@ -11,7 +11,7 @@ export default function PageHero({ eyebrow, title, subtitle, shine = false, alig
         {eyebrow && (
           <p className="star-dot mb-2 text-xs font-semibold uppercase tracking-widest text-gold-400">{eyebrow}</p>
         )}
-        <h1 className={`text-3xl font-extrabold sm:text-4xl ${shine ? 'text-shine' : 'text-gold-300'}`}>{title}</h1>
+        <h1 className={`font-display text-3xl font-normal sm:text-4xl ${shine ? 'text-shine' : ''}`}>{title}</h1>
         {subtitle && <p className="mx-auto mt-3 max-w-xl text-ink-soft">{subtitle}</p>}
       </Reveal>
     </div>

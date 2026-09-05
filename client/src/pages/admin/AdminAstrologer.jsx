@@ -7,7 +7,6 @@ const fields = [
   { key: 'specializations', label: 'Specializations' },
   { key: 'experience_years', label: 'Experience (years)', type: 'number' },
   { key: 'languages', label: 'Languages' },
-  { key: 'chat_rate_paise_per_min', label: 'Chat rate (paise/min)', type: 'number' },
   { key: 'avatar_initials', label: 'Avatar initials' },
   { key: 'is_online', label: 'Online', type: 'boolean' },
 ]

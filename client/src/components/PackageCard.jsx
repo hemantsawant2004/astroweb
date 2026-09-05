@@ -3,7 +3,7 @@ import { formatPaise } from '../utils/money'
 
 export default function PackageCard({ pkg }) {
   return (
-    <div className="card-gold flex h-full flex-col rounded-2xl border border-gold-500/20 bg-surface p-6 shadow-sm">
+    <div className="card-gold flex h-full flex-col rounded-2xl border border-gold-500/20 bg-surface p-6">
       <h3 className="text-lg font-bold text-gold-300">{pkg.name}</h3>
       <p className="mt-2 flex-1 text-sm text-ink-soft">{pkg.description}</p>
       <div className="mt-4 flex items-baseline gap-2">

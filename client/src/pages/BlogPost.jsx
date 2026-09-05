@@ -22,7 +22,7 @@ export default function BlogPost() {
     <div className="mx-auto max-w-3xl px-4 py-16">
       <Reveal>
         <Link to="/blog" className="text-sm text-gold-400 hover:underline">&larr; Back to blog</Link>
-        <h1 className="mt-3 text-3xl font-extrabold text-gold-300 sm:text-4xl">{post.title}</h1>
+        <h1 className="mt-3 font-display text-3xl font-normal sm:text-4xl">{post.title}</h1>
         <div className="mt-8 whitespace-pre-line leading-relaxed text-ink-soft">{post.content}</div>
       </Reveal>
     </div>

@@ -49,7 +49,7 @@ export default function ChartRequestForm({ type, title, description, eyebrow }) 
           <div className="gradient-cta mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full text-2xl font-bold text-black shadow-[0_0_40px_rgba(212,175,55,0.4)]">
             &#10003;
           </div>
-          <h1 className="text-2xl font-bold text-gold-300">Request received</h1>
+          <h1 className="font-display text-2xl font-normal">Request received</h1>
           <p className="mt-3 text-ink-soft">
             Thanks &mdash; Amit will personally review your birth details and reach out to discuss next steps. There
             is no automated report; this is manual, human analysis.
@@ -63,7 +63,7 @@ export default function ChartRequestForm({ type, title, description, eyebrow }) 
     <div className="mx-auto max-w-xl px-4 py-16">
       <Reveal>
         {eyebrow && <p className="star-dot text-xs font-semibold uppercase tracking-widest text-gold-400">{eyebrow}</p>}
-        <h1 className="mt-2 text-2xl font-bold text-gold-300 sm:text-3xl">{title}</h1>
+        <h1 className="mt-2 font-display text-2xl font-normal sm:text-3xl">{title}</h1>
         <p className="mt-2 text-ink-soft">{description}</p>
       </Reveal>
 

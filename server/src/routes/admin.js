@@ -32,7 +32,7 @@ router.use(
   '/astrologers',
   crudFactory({
     table: 'astrologers',
-    columns: ['name', 'slug', 'tagline', 'bio', 'specializations', 'experience_years', 'languages', 'chat_rate_paise_per_min', 'avatar_initials', 'is_online'],
+    columns: ['name', 'slug', 'tagline', 'bio', 'specializations', 'experience_years', 'languages', 'avatar_initials', 'is_online'],
   })
 )
 
@@ -62,19 +62,6 @@ router.patch('/chart-requests/:id', async (req, res) => {
     return res.status(400).json({ error: 'Invalid status' })
   }
   await pool.query('UPDATE chart_requests SET status = ? WHERE id = ?', [status, req.params.id])
-  res.json({ ok: true })
-})
-
-router.get('/callback-requests', async (_req, res) => {
-  const [rows] = await pool.query('SELECT * FROM callback_requests ORDER BY created_at DESC')
-  res.json(rows)
-})
-router.patch('/callback-requests/:id', async (req, res) => {
-  const { status } = req.body || {}
-  if (!['new', 'contacted', 'closed'].includes(status)) {
-    return res.status(400).json({ error: 'Invalid status' })
-  }
-  await pool.query('UPDATE callback_requests SET status = ? WHERE id = ?', [status, req.params.id])
   res.json({ ok: true })
 })
 

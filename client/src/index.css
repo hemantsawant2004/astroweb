@@ -1,36 +1,67 @@
 @import "tailwindcss";
 
 @theme {
-  /* gold accent scale */
-  --color-gold-300: #f6e2a0;
-  --color-gold-400: #ecc75f;
-  --color-gold-500: #d4af37;
-  --color-gold-600: #a9822a;
-  --color-gold-700: #7d5f1c;
+  /* Decision Room -- muted gold on near-black, dark by default.
+     Values match the reference "Decision Room" mockup 1:1 (--gold / --gold2 / --bg / --muted). */
+  --color-gold-300: #ead9ad;
+  --color-gold-400: #cab178;
+  --color-gold-500: #cab178;
+  --color-gold-600: #a8905c;
+  --color-gold-700: #8a7548;
 
   /* saffron kept as an alias of gold so any missed class still renders on-theme */
-  --color-saffron-50: #d4af37;
-  --color-saffron-100: #d4af37;
-  --color-saffron-200: #d4af37;
-  --color-saffron-400: #ecc75f;
-  --color-saffron-500: #d4af37;
-  --color-saffron-600: #ecc75f;
-  --color-saffron-700: #7d5f1c;
+  --color-saffron-50: #cab178;
+  --color-saffron-100: #cab178;
+  --color-saffron-200: #cab178;
+  --color-saffron-400: #cab178;
+  --color-saffron-500: #cab178;
+  --color-saffron-600: #a8905c;
+  --color-saffron-700: #8a7548;
 
-  /* black scale used for backgrounds/panels */
-  --color-cosmic-950: #030303;
-  --color-cosmic-900: #0a0a0a;
-  --color-cosmic-800: #121212;
-  --color-cosmic-700: #1a1a1a;
-  --color-cosmic-500: #262626;
+  /* near-black scale used for chrome (navbar/footer/hero/cta) and subtle section banding */
+  --color-cosmic-950: #08090c;
+  --color-cosmic-900: #0f1117;
+  --color-cosmic-800: #151820;
+  --color-cosmic-700: #1e212b;
+  --color-cosmic-500: #2c303c;
 
-  --color-cream: #000000;
-  --color-surface: #121212;
-  --color-ink: #f3ead2;
-  --color-ink-soft: #b7ab89;
+  /* content areas -- page bg stays the same near-black canvas as the chrome (no
+     faint two-tone striping); surface is a clearly-lighter elevated panel so
+     cards actually read as cards instead of dissolving into the background. */
+  --color-cream: #08090c;
+  --color-surface: #0f1117;
+  --color-ink: #ffffff;
+  --color-ink-soft: #9699a3;
 
-  --font-sans: "Segoe UI", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Instrument Serif", "DM Sans", ui-sans-serif, serif;
+}
+
+:root[data-theme="light"] {
+  --color-gold-300: #a07828;
+  --color-gold-400: #a07828;
+  --color-gold-500: #a07828;
+  --color-gold-600: #8a5e10;
+  --color-gold-700: #6b4710;
+
+  --color-saffron-50: #a07828;
+  --color-saffron-100: #a07828;
+  --color-saffron-200: #a07828;
+  --color-saffron-400: #a07828;
+  --color-saffron-500: #a07828;
+  --color-saffron-600: #8a5e10;
+  --color-saffron-700: #6b4710;
+
+  --color-cosmic-950: #1c1a14;
+  --color-cosmic-900: #2a2720;
+  --color-cosmic-800: #362f28;
+  --color-cosmic-700: #3d362b;
+  --color-cosmic-500: #544937;
+
+  --color-cream: #f5f0e8;
+  --color-surface: #ffffff;
+  --color-ink: #1c1a14;
+  --color-ink-soft: #7d7a70;
 }
 
 body {
@@ -40,25 +71,69 @@ body {
   font-family: var(--font-sans);
 }
 
+@layer base {
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+  }
+
+  /* Tight tracking on large display headings only, matching the reference mockup;
+     small card/label headings (which override weight with font-bold) keep normal tracking. */
+  h1, h2 {
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+  }
+}
+
+/* Hero/nav canvas -- follows the page theme (dark canvas in dark mode, warm
+   cream wash in light mode), matching the reference mockup's hero::before. */
 .gradient-hero {
-  background: radial-gradient(circle at 20% 20%, var(--color-cosmic-700) 0%, #000000 70%);
+  background: radial-gradient(circle at 20% 20%, var(--color-cosmic-700) 0%, var(--color-cosmic-950) 70%);
+}
+:root[data-theme="light"] .gradient-hero {
+  background: radial-gradient(circle at 20% 20%, #faf5ea 0%, var(--color-cream) 70%);
 }
 
 /* Metallic-gold buttons: static gradient + glow, subtle lift on hover only. */
 .gradient-cta {
   position: relative;
-  background-image: linear-gradient(135deg, #f0d585 0%, #d4af37 45%, #b3901f 100%);
-  box-shadow: 0 4px 18px rgba(212, 175, 55, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  background-image: linear-gradient(135deg, #ead9ad 0%, #d9bd82 45%, #cab178 100%);
+  box-shadow: 0 4px 18px rgba(202, 177, 120, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.4);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .gradient-cta:hover {
   transform: translateY(-1px);
-  box-shadow: 0 8px 22px rgba(212, 175, 55, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  box-shadow: 0 8px 22px rgba(202, 177, 120, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+
+/* Continuous attention-getter for the primary hero CTA. */
+@keyframes cta-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.62; }
+}
+.cta-blink {
+  animation: cta-blink 1.6s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cta-blink { animation: none; }
+}
+
+/* Infinite-scroll trust-bar ticker. Content is duplicated in the markup so the
+   -50% translate loops seamlessly. */
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.ticker-track {
+  animation: ticker-scroll 28s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track { animation: none; }
 }
 
 /* Gold gradient text -- used sparingly, for hero-level headings only. */
 .text-shine {
-  background-image: linear-gradient(100deg, #b3901f 15%, #f0d585 50%, #d4af37 85%);
+  background-image: linear-gradient(100deg, #8a7548 15%, #ead9ad 50%, #cab178 85%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -70,10 +145,16 @@ body {
   margin-right: 0.4em;
 }
 
+/* Faint static decorative ring behind the hero -- no motion, just depth. */
+.hero-ring {
+  border: 1px solid rgba(202, 177, 120, 0.08);
+  box-shadow: 0 0 0 80px rgba(202, 177, 120, 0.015), 0 0 0 160px rgba(202, 177, 120, 0.009);
+}
+
 @layer components {
   .input {
     width: 100%;
-    border: 1px solid #d4af3740;
+    border: 1px solid #cab17840;
     border-radius: 0.5rem;
     padding: 0.6rem 0.9rem;
     font-size: 0.95rem;
@@ -90,33 +171,34 @@ body {
   }
   .input::-webkit-calendar-picker-indicator {
     filter: invert(1);
+    opacity: 0.7;
+  }
+  :root[data-theme="light"] .input::-webkit-calendar-picker-indicator {
+    filter: none;
+    opacity: 1;
   }
 
-  /* Reusable hover treatment for content cards. */
+  /* Reusable elevation + hover treatment for content cards -- border/shadow only, no lift. */
   .card-gold {
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    box-shadow: 0 24px 60px -32px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    transition: box-shadow 0.25s ease, border-color 0.25s ease;
   }
   .card-gold:hover {
-    transform: translateY(-6px);
     border-color: var(--color-gold-400);
-    box-shadow: 0 18px 40px -12px rgba(212, 175, 55, 0.4);
+    box-shadow: 0 18px 40px -12px rgba(202, 177, 120, 0.3);
+  }
+  /* Row-style cards (Advisory Areas list) shouldn't lift -- just brighten in place. */
+  .row-hover {
+    transition: background-color 0.25s ease, border-color 0.25s ease;
+  }
+  .row-hover:hover {
+    background-color: rgba(202, 177, 120, 0.06);
+    border-color: var(--color-gold-400);
   }
 
+  /* Static status dot -- no ping/pulse animation. */
   .pulse-dot {
     position: relative;
-  }
-  .pulse-dot::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 9999px;
-    background: currentColor;
-    opacity: 0.6;
-    animation: pulse-ring 1.8s ease-out infinite;
-  }
-  @keyframes pulse-ring {
-    0% { transform: scale(1); opacity: 0.6; }
-    100% { transform: scale(2.4); opacity: 0; }
   }
 
   /* Custom-styled <details>/<summary> FAQ accordion with an animated +/x indicator. */
@@ -132,5 +214,15 @@ body {
   }
   .faq-item[open] .faq-icon {
     transform: rotate(45deg);
+  }
+
+  /* Decision Console choice buttons -- color/background only, no lift. */
+  .console-choice {
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+  .console-choice:hover,
+  .console-choice[data-active="true"] {
+    border-color: var(--color-gold-400);
+    background: rgba(202, 177, 120, 0.08);
   }
 }

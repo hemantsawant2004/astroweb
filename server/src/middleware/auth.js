@@ -29,8 +29,8 @@ export function requireUser(req, res, next) {
 }
 
 // Attaches req.user if a valid user token is present, but doesn't reject the request
-// otherwise -- used on endpoints (chart-requests, callback-requests) that accept both
-// logged-in and guest submissions.
+// otherwise -- used on endpoints (chart-requests) that accept both logged-in and guest
+// submissions.
 export function optionalUser(req, _res, next) {
   const header = req.headers.authorization || ''
   const token = header.startsWith('Bearer ') ? header.slice(7) : null

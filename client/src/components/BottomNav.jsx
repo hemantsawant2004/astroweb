@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { NavLink, Link, useLocation } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import ThemeToggle from './ThemeToggle'
 
 const iconProps = { viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.8, strokeLinecap: 'round', strokeLinejoin: 'round' }
 
@@ -11,12 +12,12 @@ const icons = {
   packages: (
     <svg {...iconProps}><rect x="3" y="7" width="18" height="12" rx="2" /><path d="M3 11h18" /><path d="M8 7V5.5A1.5 1.5 0 0 1 9.5 4h5A1.5 1.5 0 0 1 16 5.5V7" /></svg>
   ),
-  chat: (
-    <svg {...iconProps}><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4H6.5A2.5 2.5 0 0 1 4 13.5z" /></svg>
+  kundli: (
+    <svg {...iconProps}><circle cx="12" cy="12" r="9" /><path d="M12 3v18M3 12h18M6 6l12 12M18 6 6 18" /></svg>
   ),
-  horoscope: (
-    <svg {...iconProps}><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1" /><circle cx="12" cy="12" r="3.5" /></svg>
-  ),
+  // horoscope: (
+  //   <svg {...iconProps}><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1" /><circle cx="12" cy="12" r="3.5" /></svg>
+  // ),
   more: (
     <svg {...iconProps}><rect x="4" y="4" width="6" height="6" rx="1" /><rect x="14" y="4" width="6" height="6" rx="1" /><rect x="4" y="14" width="6" height="6" rx="1" /><rect x="14" y="14" width="6" height="6" rx="1" /></svg>
   ),
@@ -28,12 +29,11 @@ const icons = {
 const TABS = [
   { to: '/', label: 'Home', icon: 'home', end: true },
   { to: '/packages', label: 'Sessions', icon: 'packages' },
-  { to: '/chat', label: 'Chat', icon: 'chat' },
-  { to: '/horoscope', label: 'Horoscope', icon: 'horoscope' },
+  { to: '/kundli', label: 'Kundli', icon: 'kundli' },
+  // { to: '/horoscope', label: 'Horoscope', icon: 'horoscope' },
 ]
 
 const MORE_LINKS = [
-  { to: '/kundli', label: 'Kundli' },
   { to: '/about', label: 'About Amit Joshi' },
   { to: '/blog', label: 'Blog' },
   { to: '/faq', label: 'FAQ' },
@@ -80,6 +80,9 @@ export default function BottomNav() {
               {item.label}
             </NavLink>
           ))}
+          <div className="mt-3 flex justify-center px-3">
+            <ThemeToggle />
+          </div>
           <div className="mt-2 flex items-center justify-between border-t border-white/10 px-3 pt-3">
             {user ? (
               <>

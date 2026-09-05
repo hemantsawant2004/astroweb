@@ -20,15 +20,13 @@ const store = {
   blog: seedBlogPosts.map((b) => ({ ...b })),
   bookings: [],
   chartRequests: [],
-  callbackRequests: [],
   enquiries: [],
 }
 
 let nextId = 1000
 const newId = () => nextId++
 
-let currentUser = null // { id, name, email, phone, wallet_balance_paise }
-const walletTransactions = []
+let currentUser = null // { id, name, email, phone }
 
 function delay(ms = 350 + Math.random() * 300) {
   return new Promise((resolve) => setTimeout(resolve, ms))
@@ -76,7 +74,7 @@ function crud(collection) {
 }
 
 const adminCollections = ['testimonials', 'faqs', 'horoscopes', 'blog', 'packages', 'astrologers']
-const leadCollections = { bookings: 'bookings', 'chart-requests': 'chartRequests', 'callback-requests': 'callbackRequests', enquiries: 'enquiries' }
+const leadCollections = { bookings: 'bookings', 'chart-requests': 'chartRequests', enquiries: 'enquiries' }
 
 function parsePath(url) {
   const clean = url.split('?')[0].replace(/^\/+/, '')
@@ -115,15 +113,11 @@ export const mockApi = {
     }
     if (url === '/horoscopes') return ok(store.horoscopes)
 
-    if (url === '/wallet') {
-      if (!currentUser) fail('Missing token', 401)
-      return ok({ balancePaise: currentUser.wallet_balance_paise, transactions: [...walletTransactions].reverse() })
-    }
-    if (url === '/wallet/bookings') {
+    if (url === '/account/bookings') {
       if (!currentUser) fail('Missing token', 401)
       return ok(store.bookings.filter((b) => b.user_id === currentUser.id))
     }
-    if (url === '/wallet/chart-requests') {
+    if (url === '/account/chart-requests') {
       if (!currentUser) fail('Missing token', 401)
       return ok(store.chartRequests.filter((c) => c.user_id === currentUser.id))
     }
@@ -140,12 +134,11 @@ export const mockApi = {
         name: body.name,
         email: body.email,
         phone: body.phone || '',
-        wallet_balance_paise: 0,
       }
       return ok({ token: 'demo-user-token', user: currentUser })
     }
     if (url === '/auth/login') {
-      currentUser = currentUser || { id: newId(), name: body.email.split('@')[0], email: body.email, phone: '', wallet_balance_paise: 0 }
+      currentUser = currentUser || { id: newId(), name: body.email.split('@')[0], email: body.email, phone: '' }
       return ok({ token: 'demo-user-token', user: currentUser })
     }
     if (url === '/admin/auth/login') {
@@ -155,11 +148,6 @@ export const mockApi = {
     if (url === '/enquiries') {
       const item = { id: newId(), created_at: new Date().toISOString(), ...body }
       store.enquiries.push(item)
-      return ok({ id: item.id })
-    }
-    if (url === '/callback-requests') {
-      const item = { id: newId(), status: 'new', created_at: new Date().toISOString(), user_id: currentUser?.id || null, ...body }
-      store.callbackRequests.push(item)
       return ok({ id: item.id })
     }
     if (url === '/chart-requests') {
@@ -187,15 +175,10 @@ export const mockApi = {
       return ok({ orderId: `demo_order_${newId()}`, amount: body.amountPaise || 0, currency: 'INR', keyId: 'demo' })
     }
     if (url === '/payments/verify') {
-      if (body.purpose === 'booking') {
-        const b = store.bookings.find((x) => x.id === body.bookingId)
-        if (b) {
-          b.status = 'confirmed'
-          b.payment_status = 'paid'
-        }
-      } else if (body.purpose === 'wallet_topup' && currentUser) {
-        currentUser.wallet_balance_paise += body.amountPaise
-        walletTransactions.push({ id: newId(), type: 'credit', amount_paise: body.amountPaise, balance_after_paise: currentUser.wallet_balance_paise, created_at: new Date().toISOString() })
+      const b = store.bookings.find((x) => x.id === body.bookingId)
+      if (b) {
+        b.status = 'confirmed'
+        b.payment_status = 'paid'
       }
       return ok({ ok: true })
     }
@@ -271,23 +254,4 @@ export const mockAdminApi = {
 
 export function isDemoMode() {
   return import.meta.env.VITE_DEMO_MODE === 'true'
-}
-
-// Exposed so the scripted demo chat (no real Socket.io server available offline)
-// can read/debit the same in-memory wallet the rest of the demo app uses.
-export function getDemoUser() {
-  return currentUser
-}
-
-export function debitDemoWallet(amountPaise) {
-  if (!currentUser) return null
-  currentUser.wallet_balance_paise -= amountPaise
-  walletTransactions.push({
-    id: newId(),
-    type: 'debit',
-    amount_paise: amountPaise,
-    balance_after_paise: currentUser.wallet_balance_paise,
-    created_at: new Date().toISOString(),
-  })
-  return currentUser.wallet_balance_paise
 }

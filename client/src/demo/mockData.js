@@ -12,7 +12,6 @@ export const astrologer = {
   specializations: 'Scientific Astrology, Career Counseling, Relationship Compatibility, Vedic Chart Analysis',
   experience_years: null,
   languages: 'English, Marathi',
-  chat_rate_paise_per_min: 20000,
   avatar_initials: 'AJ',
   is_online: 1,
   created_at: '2026-08-12T06:06:44.000Z',
@@ -90,4 +89,3 @@ export const blogPosts = [
 export const enquiriesSeed = []
 export const bookingsSeed = []
 export const chartRequestsSeed = []
-export const callbackRequestsSeed = []

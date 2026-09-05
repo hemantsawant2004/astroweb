@@ -37,16 +37,8 @@ export function AuthProvider({ children }) {
     setUser(null)
   }
 
-  function updateWalletBalance(balancePaise) {
-    setUser((prev) => {
-      const next = { ...prev, wallet_balance_paise: balancePaise }
-      localStorage.setItem('myastroreader_user', JSON.stringify(next))
-      return next
-    })
-  }
-
   return (
-    <AuthContext.Provider value={{ user, ready, login, signup, logout, updateWalletBalance }}>
+    <AuthContext.Provider value={{ user, ready, login, signup, logout }}>
       {children}
     </AuthContext.Provider>
   )
